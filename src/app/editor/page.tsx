@@ -1,14 +1,24 @@
 'use client'
 
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
+import { Progress } from "@/components/ui/progress"
 import {CuboidEditor} from "@/lib/CuboidEditor";
 
 export default function Editor() {
+    const [isLoading, setIsLoading] = useState(false)
+    const [progress, setProgress] = useState<number>(0)
+
+    const progressLoading = (value: number) => {
+        setProgress(value)
+    }
+
     useEffect(() => {
-        console.log('Entered')
+        setIsLoading(true)
         let cuboidEditor: CuboidEditor | null = new CuboidEditor(window);
         cuboidEditor.startAnimation();
-        cuboidEditor.loadPCDtoScene();
+        cuboidEditor.loadPCDtoScene(progressLoading).then(() => {
+            setIsLoading(false)
+        });
 
         return () => {
             cuboidEditor?.deleteEverything();
@@ -16,9 +26,16 @@ export default function Editor() {
         }
     }, [])
 
+
     return (
         <div>
             <canvas id="main" className='h-[100vh] w-[100%]'></canvas>
+            { isLoading &&
+                <div className='fixed top-[40%] dark inset-x-0 mx-auto w-[50%]'>
+                    <p className='text-white text-lg font-light'>Data is loading...</p>
+                    <Progress value={progress}/>
+                </div>
+            }
             <div id='cuboid-container' className='fixed bottom-20 dark inset-x-0 mx-auto w-fit'>
                 <button
                     id="create-cuboid"
