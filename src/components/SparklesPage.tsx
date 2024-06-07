@@ -8,9 +8,9 @@ export function SparklesPreview() {
         <div className="h-[40rem] w-full bg-black flex flex-col items-center justify-center overflow-hidden rounded-md">
             <h1 className="md:text-7xl text-3xl lg:text-9xl font-bold text-center text-white relative z-20">
                 <span className="text-lg my-2 block font-light">by Amiraslan Bakhshili</span>
-                Segments.ai
+                3D Data Labeling
                 <br />
-                Assignment
+                MVP Software
             </h1>
             <div className="w-[40rem] h-80 relative">
                 {/* Gradients */}
