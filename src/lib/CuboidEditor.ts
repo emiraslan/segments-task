@@ -44,6 +44,7 @@ export class CuboidEditor {
 
         // Create the scene
         this.scene = new THREE.Scene();
+        this.scene.background = new THREE.Color(0x3f3f3f);
 
         // Create the came and adjust properties
         this.cameraPersp = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 300 );
